@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.button {
+    font-size: 175%;
+    background-color: gray;
+    border-color: #1F51FF;
+    border-width: 5.5px;
+}
+.button:hover {
+    color: #1ffff8;
+}
+
+.button2 {
+    font-size: 150%;
+    background-color: lightslategray;
+    border-color: #0FFF50;
+    border-width: 4.5px;
+}
+.button2:hover {
+    color: #0FFF50;
+}
+
+.text {
+    color: white;
+    font-size: 25px;
+}
