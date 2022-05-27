@@ -15,6 +15,7 @@ As of Version 2.0, the current features include:
 2. Guess the Number
 3. Odd-Even
 4. Easy and hard mode for all the games
+5. Button Click Sound
 
 # Version
 This is version 2.0 of Mini-Games. Future versions will contain greater content.
