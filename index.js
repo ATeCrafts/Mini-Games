@@ -12,6 +12,8 @@ let computerNumber;
 let finalComputerNumber;
 let computerType;
 let sum;
+let gameType;
+let finalComputerType;
 
 let rpsButton = document.getElementById("rpsButton");
 let buttonSound = new Audio("./Button Click Sound.mp3");
@@ -34,6 +36,8 @@ let button8 = document.getElementById("button8");
 let button9 = document.getElementById("button9");
 let button0 = document.getElementById("button0");
 let reloadButton = document.getElementById("reloadButton");
+let easyButton = document.getElementById("easyButton");
+let hardButton = document.getElementById("hardButton");;
 
 window.onload = windowLoad();
 
@@ -51,6 +55,8 @@ function windowLoad() {
     finalComputerNumber = null;
     computerNumber = null;
     sum = null;
+    gameType = null;
+
 
     rpsButton.style.display = "block";
     rockButton.style.display = "none";
@@ -71,6 +77,8 @@ function windowLoad() {
     button9.style.display = "none";
     button0.style.display = "none";
     reloadButton.style.display = "none";
+    easyButton.style.display = "none";
+    hardButton.style.display = "none";
 }
 
 function keyRPS() {
@@ -78,29 +86,13 @@ function keyRPS() {
 
     game = "RPS";
 
-    rpsButton.style.display = "none";
-    rockButton.style.display = "block";
-    paperButton.style.display = "block";
-    scissorsButton.style.display = "block";
-    gtnButton.style.display = "none";
-    oeButton.style.display = "none";
-    reloadButton.style.display = "block";
-
-    document.getElementById("playerDecision").innerHTML = "Player has chosen:";
-
-    altRock();
-
-    function altRock() {
-        document.getElementById("playerDecision").innerHTML = "Player has chosen: " + rock;
-        rpsTimeout = setTimeout(altPaper, 100);
-    }
-    function altPaper() {
-        document.getElementById("playerDecision").innerHTML = "Player has chosen: " + paper;
-        rpsTimeout = setTimeout(altScissors, 100);
-    }
-    function altScissors() {
-        document.getElementById("playerDecision").innerHTML = "Player has chosen: " + scissors;
-        rpsTimeout = setTimeout(altRock, 100);
+    if (gameType === null) {
+        easyButton.style.display = "block";
+        hardButton.style.display = "block";
+        rpsButton.style.display = "none";
+        gtnButton.style.display = "none";
+        oeButton.style.display = "none";
+        tttButton.style.display = "none";
     }
 }
 function keyGTN() {
@@ -108,40 +100,28 @@ function keyGTN() {
 
     game = "GTN";
 
-    rpsButton.style.display = "none";
-    gtnButton.style.display = "none";
-    oeButton.style.display = "none";
-
-    setTimeout(function() {
-        playerDecision = parseInt(prompt("Guess the number between 1 and 10 (included)"));
-        computerDecision = Math.floor((Math.random() * 10) + 1);
-        reloadButton.style.display = "block";
-
-        document.getElementById("computerDecision").innerHTML = "The number is: " + computerDecision;
-        document.getElementById("playerDecision").innerHTML = "Player has chosen the number: " + playerDecision;
-
-        if (isNaN(playerDecision) === true) {
-            location.reload();
-        }
-
-        if (playerDecision === computerDecision) {
-            document.getElementById("result").innerHTML = "Player chose the correct number!";
-        } else {
-            document.getElementById("result").innerHTML = "Player didn't chose the correct number!";
-        }
-    }, 1);
+    if (gameType === null) {
+        easyButton.style.display = "block";
+        hardButton.style.display = "block";
+        rpsButton.style.display = "none";
+        gtnButton.style.display = "none";
+        oeButton.style.display = "none";
+        tttButton.style.display = "none";
+    }
 }
 function keyOE() {
     buttonSound.play();
 
     game = "OE";
 
-    rpsButton.style.display = "none";
-    gtnButton.style.display = "none";
-    oeButton.style.display = "none";
-    evenButton.style.display = "block";
-    oddButton.style.display = "block";
-    reloadButton.style.display = "block";
+    if (gameType === null) {
+        easyButton.style.display = "block";
+        hardButton.style.display = "block";
+        rpsButton.style.display = "none";
+        gtnButton.style.display = "none";
+        oeButton.style.display = "none";
+        tttButton.style.display = "none";
+    }
 }
 
 function keyRock() {
@@ -182,26 +162,49 @@ function keyScissors() {
 }
 
 function computersDecision() {
-    if (computerDecision === null) {
-        computerDecision = Math.floor((Math.random() * 3) + 1);
+    if (gameType === "easy") {
+        if (computerDecision === null) {
+            computerDecision = Math.floor((Math.random() * 3) + 1);
 
-        if (computerDecision === 1) {
-            finalComputerDecision = rock;
+            if (computerDecision === 1) {
+                finalComputerDecision = rock;
 
-            document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+                document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+            }
+            if (computerDecision === 2) {
+                finalComputerDecision = paper;
+
+                document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+            }
+            if (computerDecision === 3) {
+                finalComputerDecision = scissors;
+
+                document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+            }
+
+            resultF();
         }
-        if (computerDecision === 2) {
-            finalComputerDecision = paper;
+    }
+    if (gameType === "hard") {
+        if (computerDecision === null) {
+            if (playerDecision === rock) {
+                finalComputerDecision = paper;
 
-            document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+                document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+            }
+            if (playerDecision === paper) {
+                finalComputerDecision = scissors;
+
+                document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+            }
+            if (playerDecision === scissors) {
+                finalComputerDecision = rock;
+
+                document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
+            }
+
+            resultF();
         }
-        if (computerDecision === 3) {
-            finalComputerDecision = scissors;
-
-            document.getElementById("computerDecision").innerHTML = "Computer has chosen: " + finalComputerDecision;
-        }
-
-        resultF();
     }
 }
 
@@ -343,8 +346,13 @@ function key1() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key2() {
     playerNumber = 2;
@@ -413,8 +421,13 @@ function key2() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key3() {
     playerNumber = 3;
@@ -483,8 +496,13 @@ function key3() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key4() {
     playerNumber = 4;
@@ -553,8 +571,13 @@ function key4() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key5() {
     playerNumber = 5;
@@ -623,8 +646,13 @@ function key5() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key6() {
     playerNumber = 6;
@@ -693,8 +721,13 @@ function key6() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key7() {
     playerNumber = 7;
@@ -763,8 +796,13 @@ function key7() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key8() {
     playerNumber = 8;
@@ -833,8 +871,13 @@ function key8() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key9() {
     playerNumber = 9;
@@ -903,8 +946,13 @@ function key9() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
 }
 function key0() {
     playerNumber = 0;
@@ -973,6 +1021,146 @@ function key0() {
         }
     }
 
-    document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
-    document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    if (gameType === "easy") {
+        document.getElementById("playerDecision").innerHTML = "Player chose " + playerType + " and " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer got " + computerType + " and chose " + finalComputerNumber;
+    } else {
+        document.getElementById("playerDecision").innerHTML = "Player got " + playerType + " and chose " + playerNumber;
+        document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType + " and " + finalComputerNumber;
+    }
+}
+
+function keyEasy() {
+    gameType = "easy";
+    easyButton.style.display = "none";
+    hardButton.style.display = "none";
+
+    if (game === "RPS") {
+        rockButton.style.display = "block";
+        paperButton.style.display = "block";
+        scissorsButton.style.display = "block";
+        reloadButton.style.display = "block";
+
+        document.getElementById("playerDecision").innerHTML = "Player has chosen:";
+
+        altRock();
+
+        function altRock() {
+            document.getElementById("playerDecision").innerHTML = "Player has chosen: " + rock;
+            rpsTimeout = setTimeout(altPaper, 100);
+        }
+        function altPaper() {
+            document.getElementById("playerDecision").innerHTML = "Player has chosen: " + paper;
+            rpsTimeout = setTimeout(altScissors, 100);
+        }
+        function altScissors() {
+            document.getElementById("playerDecision").innerHTML = "Player has chosen: " + scissors;
+            rpsTimeout = setTimeout(altRock, 100);
+        }
+    }
+    if (game === "GTN") {
+        setTimeout(function() {
+            playerDecision = parseInt(prompt("Guess the number between 1 and 10 (included)"));
+            computerDecision = Math.floor((Math.random() * 10) + 1);
+            reloadButton.style.display = "block";
+    
+            document.getElementById("computerDecision").innerHTML = "The number is: " + computerDecision;
+            document.getElementById("playerDecision").innerHTML = "Player has chosen the number: " + playerDecision;
+    
+            if (isNaN(playerDecision) === true) {
+                location.reload();
+            }
+    
+            if (playerDecision === computerDecision) {
+                document.getElementById("result").innerHTML = "Player chose the correct number!";
+            } else {
+                document.getElementById("result").innerHTML = "Player didn't chose the correct number!";
+            }
+        }, 1);
+    }
+    if (game === "OE") {
+        reloadButton.style.display = "block";
+        evenButton.style.display = "block";
+        oddButton.style.display = "block";
+    }
+}
+function keyHard() {
+    gameType = "hard";
+    easyButton.style.display = "none";
+    hardButton.style.display = "none";
+
+    if (game === "RPS") {
+        rockButton.style.display = "block";
+        paperButton.style.display = "block";
+        scissorsButton.style.display = "block";
+        reloadButton.style.display = "block";
+
+        document.getElementById("playerDecision").innerHTML = "Player has chosen:";
+
+        altRock();
+
+        function altRock() {
+            document.getElementById("playerDecision").innerHTML = "Player has chosen: " + rock;
+            rpsTimeout = setTimeout(altPaper, 100);
+        }
+        function altPaper() {
+            document.getElementById("playerDecision").innerHTML = "Player has chosen: " + paper;
+            rpsTimeout = setTimeout(altScissors, 100);
+        }
+        function altScissors() {
+            document.getElementById("playerDecision").innerHTML = "Player has chosen: " + scissors;
+            rpsTimeout = setTimeout(altRock, 100);
+        }
+    }
+    if (game === "GTN") {
+        setTimeout(function() {
+            playerDecision = parseInt(prompt("Guess the number between 1 and 100 (included)"));
+            computerDecision = Math.floor((Math.random() * 100) + 1);
+            reloadButton.style.display = "block";
+    
+            document.getElementById("computerDecision").innerHTML = "The number is: " + computerDecision;
+            document.getElementById("playerDecision").innerHTML = "Player has chosen the number: " + playerDecision;
+    
+            if (isNaN(playerDecision) === true) {
+                location.reload();
+            }
+    
+            if (playerDecision === computerDecision) {
+                document.getElementById("result").innerHTML = "Player chose the correct number!";
+            } else {
+                document.getElementById("result").innerHTML = "Player didn't chose the correct number!";
+            }
+        }, 1);
+    }
+    if (game === "OE") {
+        reloadButton.style.display = "block";
+        button1.style.display = "block";
+        button2.style.display = "block";
+        button3.style.display = "block";
+        button4.style.display = "block";
+        button5.style.display = "block";
+        button6.style.display = "block";
+        button7.style.display = "block";
+        button8.style.display = "block";
+        button9.style.display = "block";
+        button0.style.display = "block";
+
+        finalComputerType = Math.floor(Math.random() * 2);
+
+        if (finalComputerType === 0) {
+            computerType = "odd";
+            playerType = "even";
+
+            document.getElementById("playerDecision").innerHTML = "Player got " + playerType;
+            document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType;
+        } else if (finalComputerType === 1) {
+            computerType = "even";
+            playerType = "odd";
+
+            document.getElementById("playerDecision").innerHTML = "Player got " + playerType;
+            document.getElementById("computerDecision").innerHTML = "Computer chose " + computerType;
+        } else {
+            location.reload;
+        }
+    }
 }
