@@ -7,7 +7,7 @@ A few mini-games for fun and to kill time.
 3. Once the file is downloaded, locate it and open the ZIP file.
 4. From the ZIP file, extract the folder inside of it.
 5. Open the folder and you will find a file named index.html.
-6. Run this file (make sure it is not index.js, but index.html)\
+6. Run this file (make sure it is not index.js, but index.html)
 
 # Features
 As of Version 2.0, the current features include:
