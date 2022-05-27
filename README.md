@@ -10,15 +10,20 @@ A few mini-games for fun and to kill time.
 6. Run this file (make sure it is not index.js, but index.html)\
 
 # Features
-As of Version 1.0, the current features include:
+As of Version 2.0, the current features include:
 1. Rock-Paper-Scissors
 2. Guess the Number
 3. Odd-Even
+4. Easy and hard mode for all the games
 
 # Version
-This is version 1.0 of Mini-Games. Further versions will contain greater content.
+This is version 2.0 of Mini-Games. Future versions will contain greater content.
 
 # How to play
 1. Rock-Paper-Scissors: How rock-paper-scissors is played. You should know but I'll explain it anyway. 1 player chooses rock/paper/scissors and the other does the same. They both play it and rock wins over scissors, paper wins over rock, and scissors wins over paper.
 2. Guess the Number: You have to guess a number. The range will be mentioned in the question.
 3. Odd-Even: 1 player chooses odd and the other even. They both then play a number from 0-9 (inclusive). If the sum of the numbers they played adds up to even, the player who chose even wins, otherwise if it adds up to odd, the player who chose odd wins.
+
+# Changelog
+Version 1.0 -> Version 2.0:
+1. Easy and hard mode for all the games
